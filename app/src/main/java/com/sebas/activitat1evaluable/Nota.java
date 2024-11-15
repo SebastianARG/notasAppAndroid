@@ -1,6 +1,7 @@
 package com.sebas.activitat1evaluable;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Nota implements Serializable {
     private String titulo;
@@ -41,7 +42,20 @@ public class Nota implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Nota nota = (Nota) o;
+        return Objects.equals(titulo, nota.titulo) && Objects.equals(fecha, nota.fecha) && Objects.equals(contenido, nota.contenido);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(titulo, fecha, contenido);
+    }
+
+    @Override
     public String toString() {
-        return String.format("%s, %s, %s", titulo, fecha, contenido);
+        return String.format("%s, %s, %s;\t", titulo, fecha, contenido);
     }
 }

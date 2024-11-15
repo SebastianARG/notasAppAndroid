@@ -20,7 +20,7 @@ public class VerActivity extends AppCompatActivity {
     private EditText contenido;
     private TextView titulo;
     Nota nota;
-    private static Intent intent = new Intent();
+    //private static Intent intent = new Intent();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,7 @@ public class VerActivity extends AppCompatActivity {
         this.titulo = findViewById(R.id.tituloTV);
 
         Intent intent = this.getIntent();
-        this.nota = (Nota) intent.getSerializableExtra("not");
+        this.nota = (Nota) intent.getSerializableExtra("nota");
         this.fechaTD.setText(this.nota.getFecha());
         this.contenido.setText(this.nota.getContenido());
         this.titulo.setText(this.nota.getTitulo());
@@ -46,12 +46,17 @@ public class VerActivity extends AppCompatActivity {
     public void goBack(View view){
         Nota n = new Nota();
         n.setTitulo("back");
-        intent.putExtra("not",n);
+        n.setFecha("back");
+        n.setContenido("back");
+        Intent intent = new Intent();
+        intent.putExtra("nota",n);
+        //log.i("ACT1", n.toString());
         this.setResult(Activity.RESULT_OK, intent);
         this.finish();
     }
     public void eliminar(View view){
-        intent.putExtra("not", this.nota);
+        Intent intent = new Intent();
+        intent.putExtra("nota", this.nota);
         this.setResult(Activity.RESULT_OK, intent);
         this.finish();
     }

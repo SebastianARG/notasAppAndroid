@@ -31,8 +31,14 @@ public class Notas implements Serializable {
             return null;
         }
     }
+
+    public void remove(int pos){
+        notas.remove(pos);
+    }
     public void remove(Nota nota){
-        notas.remove(nota);
+        if(notas.contains(nota)){
+            notas.remove(nota);
+        }
     }
 
     public boolean isEmpty(){

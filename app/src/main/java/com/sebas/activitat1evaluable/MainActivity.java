@@ -59,10 +59,11 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < botones.length; i++) {
                 int num = i;
                 botones[i].setOnClickListener(v -> {
+
                   Intent intent = new Intent(this,VerActivity.class);
                   nota = notas.get(indicesBotones[num]);
-                  intent.putExtra("not", this.nota);
-                  this.startForResultCrear.launch(intent);
+                  intent.putExtra("nota", this.nota);
+                  this.startForResultVer.launch(intent);
                 });
             }
         startForResultCrear = registerForActivityResult(
@@ -90,12 +91,26 @@ public class MainActivity extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
-                        nota = (Nota) result.getData().getSerializableExtra("not");
+                        nota = (Nota) result.getData().getSerializableExtra("nota");
                         if(!nota.getTitulo().equals("back")){
+                            Log.i("ACT1", "regreso de ver pa borrar");
+                            Log.i("ACT1", nota.toString());
+                            setInvisibleAndEmpty();
                             index = notas.getIndexOf(nota);
-                            notas.remove(nota);
-                            setInvisible(botones[index]);
-                            botones[index].setText("");
+                            Log.i("ACT1", "Índice de la nota a eliminar: " + index);
+                            Log.i("ACT1", "Lista de notas antes de eliminar: " + notas.toString());
+                            if(index != -1 && index < notas.size()){
+                                notas.remove(index);
+                            }
+                            Log.i("ACT1", notas.toString());//aqui deberia borrarse la nota
+                            for(int i = 0; i < notas.size(); i++){
+                                setVisible(botones[i]);
+                                botones[i].setText(notas.get(i).getTitulo() + "\n\n"+notas.get(i).getFecha());
+                                Log.i("ACT1","actualizo botones");
+                            }
+                        }else{
+                            Log.i("ACT1", "regreso de ver sin borrar");
+                            Log.i("ACT1", nota.toString());
                         }
                     }
                 });
@@ -122,8 +137,17 @@ public class MainActivity extends AppCompatActivity {
         boton.setVisibility(View.INVISIBLE);
     }
 
+
+
     public void setVisible(Button boton){
         boton.setVisibility(View.VISIBLE);
+    }
+
+    private void setInvisibleAndEmpty(){
+        for (Button boton : botones) {
+            boton.setVisibility(View.INVISIBLE);
+            boton.setText("");
+        }
     }
     private void setInvisible(){
         for (Button boton : botones) {
