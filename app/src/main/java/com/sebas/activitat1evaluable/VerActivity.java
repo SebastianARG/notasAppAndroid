@@ -20,7 +20,6 @@ public class VerActivity extends AppCompatActivity {
     private EditText contenido;
     private TextView titulo;
     Nota nota;
-    //private static Intent intent = new Intent();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

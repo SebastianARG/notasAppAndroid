@@ -41,12 +41,6 @@ public class CrearActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         this.notas = (Notas) intent.getSerializableExtra("not");
 
-//        crear.setOnClickListener(v -> {
-//
-//        });
-//        cancelar.setOnClickListener(v -> {
-//
-//        });
     }
     public void setVisible(Button boton){
         boton.setVisibility(View.VISIBLE);

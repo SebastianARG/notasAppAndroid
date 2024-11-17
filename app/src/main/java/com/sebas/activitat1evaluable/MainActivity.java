@@ -114,15 +114,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-        //Añadir una nota cuando presionemos el boton de añadir
-//        btnAddNote.setOnClickListener(v -> {
-//            for (Button boton : botones) {
-//                if (boton.getVisibility() == View.INVISIBLE) {
-//                    setVisible(boton);
-//                    break;
-//                }
-//            }
-//        });
 
     }
 
